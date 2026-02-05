@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Valentine 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      overflow: hidden;
+      color: #fff;
+    }.container {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  animation: fadeIn 2s ease;
+}
+
+p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  line-height: 1.7;
+  animation: fadeIn 3s ease;
+}
+
+.heart {
+  font-size: 4rem;
+  margin: 20px 0;
+  animation: pulse 1.5s infinite;
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  background: #fff;
+  color: #ff4f7b;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.message {
+  display: none;
+  margin-top: 30px;
+  font-size: 1.2rem;
+  animation: fadeIn 2s ease;
+}
+
+/* floating hearts */
+.floating-hearts span {
+  position: absolute;
+  bottom: -50px;
+  font-size: 20px;
+  animation: floatUp linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hey My Love 💕</h1>
+    <div class="heart">❤️</div>
+    <p>
+      From the moment you came into my life, everything started feeling warmer,
+      brighter, and more beautiful. This little page is just a small way to say
+      how much you mean to me.
+    </p>
+    <div style="margin-top:25px; position: relative; display: inline-block;">
+      <button id="yesBtn" onclick="yesClicked()" style="transition: transform 0.3s ease;">Yes 💖</button>
+      <button id="noBtn" onclick="noClicked()" style="margin-left:15px; position: relative;">No 🙈</button>
+    </div><div class="message" id="message">
+  YAYYY 😭💖 I knew it!!! You just made me the happiest person. Happy Valentine’s Day my love 🌹✨
+</div>
+
+  </div>  <div class="floating-hearts" id="hearts"></div>  <script>
+    function yesClicked() {
+      document.getElementById('message').style.display = 'block';
+    }
+
+    let scale = 1;
+    function noClicked() {
+      const yesBtn = document.getElementById('yesBtn');
+      scale += 0.4;
+      yesBtn.style.transform = 'scale(' + scale + ')';
+
+      // hide NO when YES gets big enough
+      if (scale > 2.2) {
+        document.getElementById('noBtn').style.display = 'none';
+      }
+    })`;
+
+      // move No button slightly so it feels trapped
+      const noBtn = document.getElementById('noBtn');
+      noBtn.style.transform = 'translate(10px, 10px)';
+    }px, ${y}px)`;
+    }
+
+    // create floating hearts
+    const heartsContainer = document.getElementById('hearts');
+    const heartEmojis = ['❤️','💖','💕','💘','💝'];
+
+    setInterval(() => {
+      const span = document.createElement('span');
+      span.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      span.style.left = Math.random() * 100 + 'vw';
+      span.style.animationDuration = 4 + Math.random() * 4 + 's';
+      heartsContainer.appendChild(span);
+
+      setTimeout(() => span.remove(), 8000);
+    }, 300);
+  </script></body>
+    </html>
