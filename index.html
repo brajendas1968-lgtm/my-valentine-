@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Madam Jiii 💖</title>
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:linear-gradient(135deg,#ff758c,#ff7eb3);
+      color:#333;overflow:hidden
+    }
+    .card{
+      background:#fff;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.2);
+      width:92%;max-width:360px;padding:22px;text-align:center
+    }
+    h1{color:#ff4d6d;margin:6px 0 10px;font-size:22px}
+    p{margin:8px 0 14px}
+    .btns{margin-top:10px}
+    button{
+      padding:12px 22px;border:0;border-radius:30px;cursor:pointer;
+      font-size:16px;margin:8px;transition:.25s ease
+    }
+    .yes{background:#ff4d6d;color:#fff}
+    .no{background:#e6e6e6;color:#333}
+    .hidden{display:none}/* pages */
+.page{display:none}
+.page.active{display:block}
+
+/* days */
+.days{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.day{
+  border:2px dashed #ffb3c7;border-radius:14px;padding:10px;font-weight:600;
+  cursor:pointer
+}
+.day.active{background:#ffe1ea}
+.note{margin-top:10px;font-size:14px}
+
+/* simple cartoon placeholders */
+.toon{
+  width:120px;height:120px;margin:8px auto;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#fff,#ffd6e0);
+  display:flex;align-items:center;justify-content:center;font-size:40px
+}
+
+  </style>
+</head>
+<body>  <!-- PAGE 1 -->  <div class="card page active" id="page1">
+    <div class="toon">😊</div>
+    <h1>Heyyy meriii pyaari Madam Jiii 👀</h1>
+    <p>Apke liye ek surprise hai 🤭</p>
+    <p><strong>Are you ready?</strong></p>
+    <div class="btns">
+      <button class="yes" id="readyYes">Yes 💖</button>
+      <button class="no" id="readyNo">No 🙈</button>
+    </div>
+  </div>  <!-- PAGE 2 -->  <div class="card page" id="page2">
+    <div class="toon">🎁</div>
+    <h1>7 Days • 7 Letters 💌</h1>
+    <div class="days">
+      <div class="day" data-day="1">1st Day</div>
+      <div class="day" data-day="2">2nd Day</div>
+      <div class="day" data-day="3">3rd Day</div>
+      <div class="day" data-day="4">4th Day</div>
+      <div class="day" data-day="5">5th Day</div>
+      <div class="day" data-day="6">6th Day</div>
+      <div class="day" data-day="7">7th Day</div>
+    </div>
+    <div class="note" id="note">Tap a day 💕</div>
+    <div class="btns"><button class="yes" id="back">Back</button></div>
+  </div><script>
+  // page switch
+  const page1=document.getElementById('page1');
+  const page2=document.getElementById('page2');
+  const readyYes=document.getElementById('readyYes');
+  const readyNo=document.getElementById('readyNo');
+  const back=document.getElementById('back');
+
+  let scale=1;
+  readyNo.addEventListener('click',()=>{
+    scale+=.25;readyYes.style.transform=`scale(${scale})`;
+    if(scale>2.2){readyNo.style.display='none'}
+  });
+  readyYes.addEventListener('click',()=>{page1.classList.remove('active');page2.classList.add('active')});
+  back.addEventListener('click',()=>{page2.classList.remove('active');page1.classList.add('active')});
+
+  // day messages
+  const messages={
+    1:"🌹 Rose Day — A rose for you, because you color my world.",
+    2:"💍 Propose Day — I choose you. Today, tomorrow, always.",
+    3:"🍫 Chocolate Day — Life’s sweeter with you.",
+    4:"🧸 Teddy Day — For the cuddles I owe you.",
+    5:"🤝 Promise Day — I promise to try, every single day.",
+    6:"🤗 Hug Day — Come here, this one’s tight.",
+    7:"💋 Valentine’s Day — Happy Valentine’s Day, my love."
+  };
+  document.querySelectorAll('.day').forEach(d=>{
+    d.addEventListener('click',()=>{
+      document.querySelectorAll('.day').forEach(x=>x.classList.remove('active'));
+      d.classList.add('active');
+      document.getElementById('note').innerText=messages[d.dataset.day];
+    })
+  })
+</script></body>
+  </html>
