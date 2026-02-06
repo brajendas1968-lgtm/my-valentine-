@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Madam Jii 💗</title>
+  <style>
+    body{
+      margin:0;
+      font-family:'Segoe UI',sans-serif;
+      background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .container{text-align:center;max-width:420px;padding:20px}
+    h1{color:#b4005a}
+    button{
+      padding:12px 24px;
+      font-size:16px;
+      border:none;
+      border-radius:25px;
+      cursor:pointer;
+      margin:10px;
+    }
+    .yes{background:#ff4d6d;color:white}
+    .no{background:#ccc}
+    .hidden{display:none}/* envelopes */
+.envelopes{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.envelope{
+  width:100px;height:70px;
+  background:#fff;
+  border-radius:6px;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 5px 10px rgba(0,0,0,.15);
+}
+.envelope::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;
+  width:0;height:0;
+  border-left:50px solid transparent;
+  border-right:50px solid transparent;
+  border-top:35px solid #ffb6c1;
+}
+.label{position:absolute;bottom:5px;width:100%;font-size:12px;color:#444}
+
+/* letter */
+.letter{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.paper{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  max-width:420px;
+  max-height:80vh;
+  overflow:auto;
+  animation:pop .4s ease;
+  white-space:pre-line;
+}
+@keyframes pop{from{transform:scale(.8)}to{transform:scale(1)}}
+
+  </style>
+</head>
+<body><div class="container" id="start">
+  <h1>Heyyy meri pyaari Madam Jii 👀</h1>
+  <p>Aapke liye ek surprise hai 🤭</p>
+  <p><b>Are you ready?</b></p>
+  <button class="yes" onclick="openLetters()">Yes</button>
+  <button class="no" onclick="growYes()">No</button>
+</div><div class="container hidden" id="letters">
+  <h1>💌 7 Letters For You</h1>
+  <div class="envelopes">
+    <div class="envelope" onclick="openLetter(1)"><div class="label">Day 1</div></div>
+    <div class="envelope" onclick="openLetter(
