@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Madam Jii 💗</title>
+  <style>
+    body{
+      margin:0;
+      font-family:'Segoe UI',sans-serif;
+      background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    .container{text-align:center;max-width:420px;padding:20px}
+    h1{color:#b4005a}
+    button{
+      padding:12px 24px;
+      font-size:16px;
+      border:none;
+      border-radius:25px;
+      cursor:pointer;
+      margin:10px;
+    }
+    .yes{background:#ff4d6d;color:white}
+    .no{background:#ccc}
+    .hidden{display:none}.envelopes{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.envelope{
+  width:100px;height:70px;
+  background:#fff;
+  border-radius:6px;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 5px 10px rgba(0,0,0,.15);
+}
+.envelope::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;
+  width:0;height:0;
+  border-left:50px solid transparent;
+  border-right:50px solid transparent;
+  border-top:35px solid #ffb6c1;
+}
+.label{position:absolute;bottom:5px;width:100%;font-size:12px;color:#444}
+
+.letter{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.paper{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  max-width:420px;
+  max-height:80vh;
+  overflow:auto;
+  animation:pop .4s ease;
+  white-space:pre-line;
+}
+@keyframes pop{from{transform:scale(.8)}to{transform:scale(1)}}
+
+  </style>
+</head>
+<body><div class="container" id="start">
+  <h1>Heyyy meri pyaari Madam Jii 👀</h1>
+  <p>Aapke liye ek surprise hai 🤭</p>
+  <p><b>Are you ready?</b></p>
+  <button class="yes" id="yesBtn">Yes</button>
+  <button class="no" id="noBtn">No</button>
+</div><div class="container hidden" id="letters">
+  <h1>💌 7 Letters For You</h1>
+  <div class="envelopes">
+    <div class="envelope" data-day="1"><div class="label">Day 1</div></div>
+    <div class="envelope" data-day="2"><div class="label">Day 2</div></div>
+    <div class="envelope" data-day="3"><div class="label">Day 3</div></div>
+    <div class="envelope" data-day="4"><div class="label">Day 4</div></div>
+    <div class="envelope" data-day="5"><div class="label">Day 5</div></div>
+    <div class="envelope" data-day="6"><div class="label">Day 6</div></div>
+    <div class="envelope" data-day="7"><div class="label">Day 7</div></div>
+  </div>
+</div><div class="letter hidden" id="letterBox">
+  <div class="paper" id="paper"></div>
+</div><script>
+const start = document.getElementById('start');
+const letters = document.getElementById('letters');
+const letterBox = document.getElementById('letterBox');
+const paper = document.getElementById('paper');
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+
+let yesScale = 1;
+
+noBtn.addEventListener('click', () => {
+  yesScale += 0.3;
+  yesBtn.style.transform = `scale(${yesScale})`;
+});
+
+yesBtn.addEventListener('click', () => {
+  start.classList.add('hidden');
+  letters.classList.remove('hidden');
+});
+
+letterBox.addEventListener('click', () => {
+  letterBox.classList.add('hidden');
+});
+
+const messages = {
+1:`Rishita,\nTum kisi rose se kam nahi ho 🌹\nbas farq itna hai\nki rose ek din ke liye hota hai,\naur tum har din mere khayalon mein 🫠\n\nTumhari awaaz ka sukoon\nkisi khushboo mein nahi 🙂\nTumhari aankhon ki chamak\ndil se judh jaati hai 🫀\n\nRose Day par phool bahana hai,\nagar mohabbat ka matlab poocha jaaye,\ntoh jawaab bas tum ho 🫶`,
+2:`Tum wo ho\njiske baare mein sochkar\ndil khud muskurata hai 🌷\n\nMain perfect nahi hoon,\npar tumhara saath\nimandari se nibhaana chahta hoon 🫂\n\nAgar zindagi safar hai,\ntoh har mod par\ntumhara haath chahunga 💗\n\nKya tum meri zindagi ka\nsabse khoobsurat hissa banogi, Rishita? 👉👈`,
+3:`Cutiee 👀\nTum chocolate jaise ho,\ndheere dheere dil mein ghul jaati ho 🫠\n\nTumhari hassi\nsaari thakaan mita deti hai 🤭\n\nMeri zindagi ki sweetness\nkab se aapke naam ho chuki hai,\nMadam Jii 🍫💝`,
+4:`Teddy Day 🧸\nJab bhi aap udaas ho,\nsoch lena ek hug\nhamesha ready hai 🤗`,
+5:`Promise Day 🤍\nRespect, care aur honesty\nkabhi kam nahi hone dunga ✨`,
+6:`Hug Day 🤗\nYe hug screen se hai,\npar dil se 💞`,
+7:`Valentine’s Day 💖\nThank you meri life mein aane ke liye.\nAap mere liye bohot special ho 🫶`
+};
+
+document.querySelectorAll('.envelope').forEach(env => {
+  env.addEventListener('click', () => {
+    const day = env.dataset.day;
+    paper.innerText = messages[day];
+    letterBox.classList.remove('hidden');
+  });
+});
+</script></body>
+</html>
