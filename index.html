@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Madam Jii 💗</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.container{
+  text-align:center;
+  max-width:420px;
+  padding:20px;
+}
+
+h1{color:#b4005a}
+
+button{
+  padding:12px 26px;
+  font-size:16px;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  margin:10px;
+}
+
+.yes{background:#ff4d6d;color:#fff}
+.no{background:#ddd}
+
+.hidden{display:none}
+
+/* envelopes */
+.envelopes{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:20px;
+}
+
+.envelope{
+  width:100px;
+  height:70px;
+  background:#fff;
+  border-radius:6px;
+  position:relative;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+.envelope::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;
+  border-left:50px solid transparent;
+  border-right:50px solid transparent;
+  border-top:35px solid #ffb6c1;
+}
+
+.label{
+  position:absolute;
+  bottom:5px;
+  width:100%;
+  font-size:12px;
+}
+
+/* letter popup */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.paper{
+  background:#fff;
+  padding:25px;
+  border-radius:12px;
+  max-width:420px;
+  max-height:80vh;
+  overflow:auto;
+  white-space:pre-line;
+  animation:pop .3s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.85)}
+  to{transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- START PAGE -->
+<div class="container" id="startPage">
+  <h1>Heyyy meri pyaari Madam Jii 👀</h1>
+  <p>Aapke liye ek chhota sa surprise hai 🤭</p>
+  <p><b>Are you ready?</b></p>
+
+  <button class="yes" id="yesBtn">Yes</button>
+  <button class="no" id="noBtn">No</button>
+</div>
+
+<!-- LETTERS PAGE -->
+<div class="container hidden" id="lettersPage">
+  <h1>💌 7 Letters For You</h1>
+
+  <div class="envelopes">
+    <div class="envelope" data-day="1"><div class="label">Day 1</div></div>
+    <div class="envelope" data-day="2"><div class="label">Day 2</div></div>
+    <div class="envelope" data-day="3"><div class="label">Day 3</div></div>
+    <div class="envelope" data-day="4"><div class="label">Day 4</div></div>
+    <div class="envelope" data-day="5"><div class="label">Day 5</div></div>
+    <div class="envelope" data-day="6"><div class="label">Day 6</div></div>
+    <div class="envelope" data-day="7"><div class="label">Day 7</div></div>
+  </div>
+</div>
+
+<!-- LETTER POPUP -->
+<div class="overlay hidden" id="overlay">
+  <div class="paper" id="paper"></div>
+</div>
+
+<script>
+const startPage = document.getElementById("startPage");
+const lettersPage = document.getElementById("lettersPage");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const overlay = document.getElementById("overlay");
+const paper = document.getElementById("paper");
+
+let scale = 1;
+
+noBtn.onclick = () => {
+  scale += 0.3;
+  yesBtn.style.transform = "scale(" + scale + ")";
+};
+
+yesBtn.onclick = () => {
+  startPage.classList.add("hidden");
+  lettersPage.classList.remove("hidden");
+};
+
+overlay.onclick = () => {
+  overlay.classList.add("hidden");
+};
+
+const messages = {
+1:`Rishita,
+Tum kisi rose se kam nahi ho 🌹
+bas farq itna hai
+ki rose ek din ke liye hota hai,
+aur tum har din mere khayalon mein 🫠
+
+Tumhari awaaz ka sukoon
+kisi khushboo mein nahi 🙂
+Tumhari aankhon ki chamak
+dil se judh jaati hai 🫀
+
+Agar mohabbat ka matlab poocha jaaye,
+toh jawaab bas tum ho 🫶`,
+
+2:`Tum wo ho
+jiske baare mein sochkar
+dil khud muskurata hai 🌷
+
+Main perfect nahi hoon,
+par tumhara saath
+imandari se nibhaana chahta hoon 🫂
+
+Kya tum meri zindagi ka
+sabse khoobsurat hissa banogi, Rishita? 👉👈`,
+
+3:`Cutiee 👀
+Tum chocolate jaise ho,
+dheere dheere dil mein ghul jaati ho 🫠
+
+Tumhari hassi
+saari thakaan mita deti hai 🤭
+
+Meri zindagi ki sweetness
+kab se aapke naam ho chuki hai,
+Madam Jii 🍫💝`,
+
+4:`Teddy Day 🧸
+Jab bhi aap udaas ho,
+soch lena ek hug
+hamesha ready hai 🤗`,
+
+5:`Promise Day 🤍
+Respect, care aur honesty
+kabhi kam nahi hone dunga ✨`,
+
+6:`Hug Day 🤗
+Ye hug screen se hai,
+par dil se 💞`,
+
+7:`Valentine’s Day 💖
+Thank you meri life mein aane ke liye.
+Aap mere liye bohot special ho 🫶`
+};
+
+document.querySelectorAll(".envelope").forEach(env=>{
+  env.onclick = () => {
+    paper.innerText = messages[env.dataset.day];
+    overlay.classList.remove("hidden");
+  };
+});
+</script>
+
+</body>
+  </html>
