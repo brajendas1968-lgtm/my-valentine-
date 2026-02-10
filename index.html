@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Madam Jii 💖</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#f8cdda,#1d2b64);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+  overflow:hidden;
+}
+
+/* ---------- HOME ---------- */
+#home{
+  text-align:center;
+}
+
+h1{
+  font-size:1.9rem;
+  margin-bottom:10px;
+}
+
+p{
+  font-size:1rem;
+  opacity:.9;
+}
+
+.buttons{
+  margin-top:25px;
+}
+
+button{
+  padding:12px 28px;
+  border:none;
+  border-radius:25px;
+  font-size:1rem;
+  cursor:pointer;
+  margin:0 10px;
+}
+
+#yesBtn{
+  background:#ff4d6d;
+  color:#fff;
+  transition:.3s;
+}
+
+#noBtn{
+  background:#ddd;
+  color:#333;
+  position:relative;
+}
+
+/* ---------- LETTER PAGE ---------- */
+#letters{
+  display:none;
+  width:100%;
+  height:100vh;
+  padding:20px;
+}
+
+.letter{
+  background:#fff;
+  color:#333;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:15px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+
+.letter h3{
+  text-align:center;
+}
+
+.content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .6s ease;
+  margin-top:10px;
+  font-size:.95rem;
+  line-height:1.5;
+}
+
+.letter.open .content{
+  max-height:600px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<div id="home">
+  <h1>Heyyy meri pyaari Madam Jii 👀</h1>
+  <p>Aapke liye ek chhota sa surprise hai 🤭</p>
+  <p style="margin-top:10px;font-weight:bold;">Are you ready?</p>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+</div>
+
+<!-- LETTERS -->
+<div id="letters">
+
+  <div class="letter">
+    <h3>🌹 Day 1 – Rose Day</h3>
+    <div class="content">
+      Rishita,<br><br>
+      Tum kisi rose se kam nahi ho,<br>
+      bas farq itna hai ki rose ek din ke liye hota hai,<br>
+      aur tum har din mere khayalon mein 💗
+    </div>
+  </div>
+
+  <div class="letter">
+    <h3>💍 Day 2 – Propose Day</h3>
+    <div class="content">
+      Tum wo ho jiske baare mein sochkar<br>
+      dil apne aap muskurane lagta hai 🤍<br><br>
+      Kya tum meri zindagi ka sabse khoobsurat hissa banogi? 👉👈
+    </div>
+  </div>
+
+  <div class="letter">
+    <h3>🍫 Day 3 – Chocolate Day</h3>
+    <div class="content">
+      Chocolate ki tarah tum bhi<br>
+      dheere dheere dil mein ghul jaati ho 🫠
+    </div>
+  </div>
+
+  <div class="letter">
+    <h3>🧸 Day 4 – Teddy Day</h3>
+    <div class="content">
+      Tumhari yaadein teddy jaise soft hain 🤗
+    </div>
+  </div>
+
+  <div class="letter">
+    <h3>🤞 Day 5 – Promise Day</h3>
+    <div class="content">
+      Har khushi aur mushkil mein saath nibhaane ka vaada 💖
+    </div>
+  </div>
+
+  <div class="letter">
+    <h3>🤗 Day 6 – Hug Day</h3>
+    <div class="content">
+      Ek hug jo saari thakaan mita de 🫂
+    </div>
+  </div>
+
+  <div class="letter">
+    <h3>💋 Day 7 – Kiss Day</h3>
+    <div class="content">
+      Mohabbat ki sabse pyaari shuruaat 😘
+    </div>
+  </div>
+
+</div>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const home = document.getElementById("home");
+const letters = document.getElementById("letters");
+
+let scale = 1;
+
+noBtn.addEventListener("click", ()=>{
+  scale += 0.15;
+  yesBtn.style.transform = `scale(${scale})`;
+});
+
+yesBtn.addEventListener("click", ()=>{
+  home.style.display="none";
+  letters.style.display="block";
+});
+
+document.querySelectorAll(".letter").forEach(letter=>{
+  letter.addEventListener("click",
