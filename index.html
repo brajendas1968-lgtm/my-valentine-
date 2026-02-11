@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Madam Jii 💗</title>
+<style>
+
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  text-align:center;
+  overflow:hidden;
+  background: linear-gradient(135deg,#ff9ecf,#ffc1e3,#ffb6d9);
+}
+
+/* Floating hearts & flowers */
+.floating{
+  position:fixed;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+}
+
+.floating span{
+  position:absolute;
+  font-size:22px;
+  animation: floatUp 12s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(100vh);opacity:0;}
+  20%{opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* Intro Page */
+#intro{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:2;
+  position:relative;
+}
+
+button{
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  margin:10px;
+  transition:0.3s;
+}
+
+#yesBtn{
+  background:#ff4da6;
+  color:white;
+}
+
+#noBtn{
+  background:#666;
+  color:white;
+}
+
+/* Envelope Page */
+#main{
+  display:none;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  gap:20px;
+  position:relative;
+  z-index:2;
+}
+
+.envelope{
+  width:90px;
+  height:60px;
+  background:#ff4da6;
+  position:relative;
+  cursor:pointer;
+  border-radius:5px;
+}
+
+.envelope:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:0;
+  height:0;
+  border-left:45px solid transparent;
+  border-right:45px solid transparent;
+  border-top:30px solid #ff99cc;
+}
+
+/* Letter Screen */
+#letterScreen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+  background:linear-gradient(135deg,#ffb6d9,#ffcce6);
+  z-index:5;
+}
+
+#letterText{
+  background:rgba(255,255,255,0.5);
+  padding:25px;
+  border-radius:20px;
+  max-width:90%;
+  box-shadow:0 0 25px rgba(255,0,120,0.6);
+  font-size:16px;
+  line-height:1.7;
+  white-space:pre-wrap;
+}
+
+.back-btn{
+  margin-top:30px;
+  padding:10px 20px;
+  background:#ff4da6;
+  color:white;
+  border:none;
+  border-radius:20px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="floating" id="floating"></div>
+
+<!-- INTRO -->
+<div id="intro">
+<h2>Heyyy meriii pyaari Madam Jiii 👀💗<br>Apke liye ek surprise hai 🤭</h2>
+<p>Are you ready? 😉</p>
+<button id="yesBtn">YES 💗</button>
+<button id="noBtn">NO 🙄</button>
+</div>
+
+<!-- ENVELOPES -->
+<div id="main">
+<div class="envelope" onclick="openLetter(0)"></div>
+<div class="envelope" onclick="openLetter(1)"></div>
+<div class="envelope" onclick="openLetter(2)"></div>
+<div class="envelope" onclick="openLetter(3)"></div>
+<div class="envelope" onclick="openLetter(4)"></div>
+<div class="envelope" onclick="openLetter(5)"></div>
+<div class="envelope" onclick="openLetter(6)"></div>
+<div class="envelope" onclick="openLetter(7)"></div>
+</div>
+
+<!-- LETTER SCREEN -->
+<div id="letterScreen">
+<div id="letterText"></div>
+<button class="back-btn" onclick="goBack()">Back 💗</button>
+</div>
+
+<script>
+
+/* Floating animation */
+const floatContainer=document.getElementById("floating");
+for(let i=0;i<25;i++){
+  let span=document.createElement("span");
+  span.innerHTML=Math.random()>0.5?"💗":"🌷";
+  span.style.left=Math.random()*100+"vw";
+  span.style.animationDuration=(8+Math.random()*6)+"s";
+  span.style.fontSize=(18+Math.random()*15)+"px";
+  floatContainer.appendChild(span);
+}
+
+/* Yes No Logic */
+let noCount=0;
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+
+noBtn.onclick=function(){
+  noCount++;
+  yesBtn.style.transform=`scale(${1+noCount*0.2})`;
+  if(noCount>=5){
+    noBtn.style.display="none";
+  }
+};
+
+yesBtn.onclick=function(){
+  document.getElementById("intro").style.display="none";
+  document.getElementById("main").style.display="flex";
+};
+
+/* Messages */
+const letters=[
+
+`Cutiee Piee 🌷,
+
+Tum kisi rose se kam nahi ho 💐
+par farq bas itna hai…
+rose sirf dekhne mein khoobsurat hota hai 🙂
+aur tum mehsoos karne mein bhi 💗
+
+Tumhari hasi na…
+bilkul dil ko halka kar deti hai 🫀
+jaise koi dheere se “sab theek hai” keh raha ho ❤️‍🩹
+
+Rose Day par log phool dete hain 🤭
+par main kya doon tumhe, Kolizaa 👉👈
+tum toh meri zindagi ka sabse pyaara phool ho 🫶🌷`,
+
+`Madam Jii 💗,
+
+Jab tum haste ho na 🙂
+toh lagta hai sab kuch sahi jagah par hai 🫀
+
+Main perfect nahi hoon 👉👈
+par tumhare saath rehna
+bilkul perfect sa feel hota hai 🥰
+
+Agar zindagi ek safar hai 🌷
+toh main har mod par
+sirf tumhara haath pakadna chahta hoon 🫂💗
+
+kya tum meri hamesha wali person banogi? 🫶💐`,
+
+`Cutiee Piee 😋,
+
+Chocolate dheere dheere melt hoti hai…
+aur bilkul waise hi
+tum mere dil mein ghul gayi ho 🫠💗
+
+Tumhari ek chhoti si smile 🙂
+mera pura din sweet bana deti hai 🌷
+
+Jaise chocolate ka ek bite
+mood better kar deta hai 😋
+waise hi tumhara khayal
+mera dil sambhaal leta hai 🫀❤️‍🩹
+
+meri zindagi ki sweetness
+kab se tumhare naam hai 🫶💗`,
+
+`Madam Jii 🥰,
+
+Kabhi kabhi mann karta hai
+tumhe ek tight sa hug doon 🫂💗
+aur bas thodi der ke liye duniya bhool jaun 🙂
+
+Tum meri comfort ho 🌷
+mera sukoon ho 💗
+aur mera sabse soft corner ho 👉👈🥰`,
+
+`Kolizaa 🫀,
+
+Main bada wada nahi karunga 🙄
+par ek sachha promise karta hoon 💗
+
+Jab tum udaas hogi 😭
+main tumhe hasane ki puri koshish karunga 🙂
+
+Jab tum thak jaogi ❤️‍🩹
+main tumhara sahara banunga 🫂
+
+Aur chahe jo bhi ho
+tumhara haath kabhi nahi chhodunga 🫶💐`,
+
+`Cutiee Piee 🫂,
+
+Ek hug mein bahut saari baatein hoti hain 💗
+jo shabdon mein nahi aati 🙂
+
+Agar woh hug tumhara ho 🥰
+toh duniya ka har stress halka lagta hai ❤️‍🩹
+
+Aur tum…
+tum meri woh jagah ho
+jahan main bilkul real reh sakta hoon 👉👈💗`,
+
+`Madam Jii 💗,
+
+Tumhara “maar khaoge” 🙄💗
+tumhara “baat nhi karungi” 😉
+ye meri favourite aadatein hain 🥰
+
+Agar zindagi ek kahani hai 🌷
+toh main chahta hoon
+har page tumhare saath likhun 🫶💗
+
+Happy Valentine’s Day Kolizaa 💐
+tum meri sabse pyaari aadat ho 🫀💗`,
+
+`Cutiee Piee 💋,
+
+Kiss sirf ek moment nahi hota 💗
+woh ek chhota sa ehsaas hota hai
+jo dil ko aur kareeb le aata hai 🫀
+
+Kabhi kabhi mann karta hai
+tumhari gaal par ek pyara sa kiss rakh doon 😙
+sirf isliye taaki tum muskura do 🙂
+
+Tum meri sharam bhi ho 👉👈
+aur meri himmat bhi 🫶
+
+Har chhoti si nazdeeki
+mere liye bahut special hai 🥰💗`
+
+];
+
+function openLetter(index){
+  document.getElementById("letterScreen").style.display="flex";
+  typeWriter(letters[index]);
+}
+
+function goBack(){
+  document.getElementById("letterScreen").style.display="none";
+}
+
+function typeWriter(text){
+  const display=document.getElementById("letterText");
+  display.innerHTML="";
+  let i=0;
+  function typing(){
+    if(i<text.length){
+      display.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typing,20);
+    }
+  }
+  typing();
+}
+
+</script>
+
+</body>
+  </html>
