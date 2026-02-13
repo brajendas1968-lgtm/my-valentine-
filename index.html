@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Cutiee 💗</title>
+
+<style>
+body{
+margin:0;
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg,#ff9ecb,#ffcce6);
+text-align:center;
+color:#333;
+}
+
+/* Intro */
+#intro{
+margin-top:120px;
+}
+
+button{
+padding:10px 20px;
+font-size:18px;
+margin:10px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#yesBtn{background:#ff4da6;color:white;}
+#noBtn{background:white;color:#ff4da6;border:2px solid #ff4da6;}
+
+/* Grid */
+#grid{
+display:none;
+margin-top:40px;
+grid-template-columns:repeat(2,150px);
+justify-content:center;
+gap:20px;
+}
+
+/* Envelope */
+.envelope{
+background:white;
+padding:25px;
+border-radius:10px;
+cursor:pointer;
+font-size:30px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.envelope:hover{
+transform:scale(1.1);
+}
+
+/* Message Box */
+#messageBox{
+display:none;
+margin:30px auto;
+width:85%;
+max-width:500px;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(255,0,150,0.3);
+white-space:pre-line;
+}
+
+#backBtn{
+margin-top:15px;
+background:#ff4da6;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+<h2>Will you open this surprise? 💗</h2>
+<button id="yesBtn">Yes 💗</button>
+<button id="noBtn">No 🙄</button>
+</div>
+
+<div id="grid"></div>
+
+<div id="messageBox">
+<div id="messageText"></div>
+<button id="backBtn">Back 💌</button>
+</div>
+
+<script>
+
+let yesBtn = document.getElementById("yesBtn");
+let noBtn = document.getElementById("noBtn");
+let grid = document.getElementById("grid");
+let intro = document.getElementById("intro");
+let messageBox = document.getElementById("messageBox");
+let messageText = document.getElementById("messageText");
+
+let scale = 1;
+let taps = 0;
+
+/* No Button Logic */
+noBtn.onclick = function(){
+taps++;
+scale += 0.3;
+yesBtn.style.transform = "scale(" + scale + ")";
+if(taps >= 5){
+noBtn.style.display = "none";
+}
+};
+
+/* Yes Button Logic */
+yesBtn.onclick = function(){
+intro.style.display = "none";
+grid.style.display = "grid";
+};
+
+/* FULL ORIGINAL MESSAGES */
+const messages = [
+
+`1️⃣ Cutiee Piee 🌷
+
+Tum kisi rose se kam nahi ho 💐
+par farq bas itna hai…
+rose sirf dekhne mein khoobsurat hota hai 🙂
+aur tum mehsoos karne mein bhi 💗
+
+Tumhari hasi na…
+bilkul dil ko halka kar deti hai 🫀
+jaise koi dheere se “sab theek hai” keh raha ho ❤️‍🩹
+
+Rose Day par log phool dete hain 🤭
+par main kya doon tumhe, Kolizaa 👉👈
+tum toh meri zindagi ka sabse pyaara phool ho 🫶🌷`,
+
+`2️⃣ Madam Jii 💗
+
+Jab tum haste ho na 🙂
+toh lagta hai sab kuch sahi jagah par hai 🫀
+
+Main perfect nahi hoon 👉👈
+par tumhare saath rehna
+bilkul perfect sa feel hota hai 🥰
+
+Agar zindagi ek safar hai 🌷
+toh main har mod par
+sirf tumhara haath pakadna chahta hoon 🫂💗
+
+kya tum meri hamesha wali person banogi? 🫶💐`,
+
+`3️⃣ Chocolate Day 🍫
+
+Chocolate dheere dheere melt hoti hai…
+aur bilkul waise hi
+tum mere dil mein ghul gayi ho 🫠💗
+
+meri zindagi ki sweetness
+kab se tumhare naam hai 🫶💗`,
+
+`4️⃣ Teddy Day 🧸
+
+Kabhi kabhi mann karta hai
+tumhe ek tight sa hug doon 🫂💗
+
+Tum meri comfort ho 🌷
+mera sukoon ho 💗`,
+
+`5️⃣ Promise Day 🤝
+
+Jab tum udaas hogi
+main tumhe hasane ki koshish karunga 🙂
+
+Aur tumhara haath kabhi nahi chhodunga 🫶💐`,
+
+`6️⃣ Hug Day 🤗
+
+Ek hug mein bahut saari baatein hoti hain 💗
+Aur tum meri woh jagah ho
+jahan main bilkul real reh sakta hoon 👉👈💗`,
+
+`7️⃣ Kiss Day 💋
+
+Kabhi kabhi mann karta hai
+tumhari gaal par ek pyara sa kiss rakh doon 😙💗`,
+
+`8️⃣ Valentine’s Day 💘
+
+Tum meri sabse pyaari aadat ho 🥰💗
+Happy Valentine’s Day, Kolizaa 💐`
+];
+
+/* Create Envelopes */
+for(let i = 0; i < messages.length; i++){
+let div = document.createElement("div");
+div.className = "envelope";
+div.innerHTML = "💌";
+div.onclick = function(){
+grid.style.display = "none";
+messageBox.style.display = "block";
+messageText.innerText = messages[i];
+};
+grid.appendChild(div);
+}
+
+/* Back Button */
+document.getElementById("backBtn").onclick = function(){
+messageBox.style.display = "none";
+grid.style.display = "grid";
+};
+
+</script>
+
+</body>
+</html>
