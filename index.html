@@ -12,6 +12,36 @@ font-family: Arial, sans-serif;
 background: linear-gradient(135deg,#ff9ecb,#ffcce6);
 text-align:center;
 color:#333;
+overflow:hidden;
+}
+
+/* Floating Hearts Background */
+.hearts{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+pointer-events:none;
+z-index:0;
+}
+
+.heart{
+position:absolute;
+bottom:-50px;
+animation: floatUp 6s linear infinite;
+opacity:0.7;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0) scale(1);opacity:0.8;}
+100%{transform:translateY(-110vh) scale(1.5);opacity:0;}
+}
+
+/* Content layers above hearts */
+#intro,#grid,#messageBox{
+position:relative;
+z-index:2;
 }
 
 /* Intro */
@@ -79,6 +109,8 @@ color:white;
 
 <body>
 
+<div class="hearts" id="heartsContainer"></div>
+
 <div id="intro">
 <h2>Will you open this surprise? 💗</h2>
 <button id="yesBtn">Yes 💗</button>
@@ -94,36 +126,36 @@ color:white;
 
 <script>
 
-let yesBtn = document.getElementById("yesBtn");
-let noBtn = document.getElementById("noBtn");
-let grid = document.getElementById("grid");
-let intro = document.getElementById("intro");
-let messageBox = document.getElementById("messageBox");
-let messageText = document.getElementById("messageText");
+let yesBtn=document.getElementById("yesBtn");
+let noBtn=document.getElementById("noBtn");
+let grid=document.getElementById("grid");
+let intro=document.getElementById("intro");
+let messageBox=document.getElementById("messageBox");
+let messageText=document.getElementById("messageText");
 
-let scale = 1;
-let taps = 0;
+let scale=1;
+let taps=0;
 
-/* No Button Logic */
-noBtn.onclick = function(){
+/* No button effect */
+noBtn.onclick=function(){
 taps++;
-scale += 0.3;
-yesBtn.style.transform = "scale(" + scale + ")";
-if(taps >= 5){
-noBtn.style.display = "none";
+scale+=0.3;
+yesBtn.style.transform="scale("+scale+")";
+if(taps>=5){
+noBtn.style.display="none";
 }
 };
 
-/* Yes Button Logic */
-yesBtn.onclick = function(){
-intro.style.display = "none";
-grid.style.display = "grid";
+/* Yes button */
+yesBtn.onclick=function(){
+intro.style.display="none";
+grid.style.display="grid";
 };
 
-/* FULL ORIGINAL MESSAGES */
-const messages = [
+/* Messages */
+const messages=[
 
-` Rose Day 🌷
+`Rose Day 🌷
 
 Tum kisi rose se kam nahi ho 💐
 par farq bas itna hai…
@@ -138,7 +170,7 @@ Rose Day par log phool dete hain 🤭
 par main kya doon tumhe, Kolizaa 👉👈
 tum toh meri zindagi ka sabse pyaara phool ho 🫶🌷`,
 
-` Propose Day 💗
+`Propose Day 💗
 
 Jab tum haste ho na 🙂
 toh lagta hai sab kuch sahi jagah par hai 🫀
@@ -153,7 +185,7 @@ sirf tumhara haath pakadna chahta hoon 🫂💗
 
 kya tum meri hamesha wali person banogi? 🫶💐`,
 
-` Chocolate Day 🍫
+`Chocolate Day 🍫
 
 Chocolate dheere dheere melt hoti hai…
 aur bilkul waise hi
@@ -162,7 +194,7 @@ tum mere dil mein ghul gayi ho 🫠💗
 meri zindagi ki sweetness
 kab se tumhare naam hai 🫶💗`,
 
-` Teddy Day 🧸
+`Teddy Day 🧸
 
 Kabhi kabhi mann karta hai
 tumhe ek tight sa hug doon 🫂💗
@@ -170,50 +202,64 @@ tumhe ek tight sa hug doon 🫂💗
 Tum meri comfort ho 🌷
 mera sukoon ho 💗`,
 
-` Promise Day 🤝
+`Promise Day 🤝
 
 Jab tum udaas hogi
 main tumhe hasane ki koshish karunga 🙂
 
 Aur tumhara haath kabhi nahi chhodunga 🫶💐`,
 
-` Hug Day 🤗
+`Hug Day 🤗
 
 Ek hug mein bahut saari baatein hoti hain 💗
 Aur tum meri woh jagah ho
 jahan main bilkul real reh sakta hoon 👉👈💗`,
 
-` Kiss Day 💋
+`Kiss Day 💋
 
 Kabhi kabhi mann karta hai
 tumhari gaal par ek pyara sa kiss rakh doon 😙💗`,
 
-` Valentine’s Day 💘
+`Valentine’s Day 💘
 
 Tum meri sabse pyaari aadat ho 🥰💗
 Happy Valentine’s Day, Kolizaa 💐`
 ];
 
-/* Create Envelopes */
-for(let i = 0; i < messages.length; i++){
-let div = document.createElement("div");
-div.className = "envelope";
-div.innerHTML = "💌";
-div.onclick = function(){
-grid.style.display = "none";
-messageBox.style.display = "block";
-messageText.innerText = messages[i];
+/* Create envelopes */
+for(let i=0;i<messages.length;i++){
+let div=document.createElement("div");
+div.className="envelope";
+div.innerHTML="💌";
+div.onclick=function(){
+grid.style.display="none";
+messageBox.style.display="block";
+messageText.innerText=messages[i];
 };
 grid.appendChild(div);
 }
 
-/* Back Button */
-document.getElementById("backBtn").onclick = function(){
-messageBox.style.display = "none";
-grid.style.display = "grid";
+/* Back button */
+document.getElementById("backBtn").onclick=function(){
+messageBox.style.display="none";
+grid.style.display="grid";
 };
+
+/* Floating hearts generator */
+function createHeart(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💗";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(15+Math.random()*20)+"px";
+heart.style.animationDuration=(4+Math.random()*3)+"s";
+document.getElementById("heartsContainer").appendChild(heart);
+setTimeout(()=>{heart.remove();},7000);
+}
+
+setInterval(createHeart,500);
 
 </script>
 
 </body>
-</html>
+  </html>
